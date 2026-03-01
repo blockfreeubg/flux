@@ -2,7 +2,7 @@
 
 <h1 align="center">Flux Unblocker</h1>
 
-Flux has CAPTCHA support! Some of the popular websites that Scramjet supports include:
+Flux has CAPTCHA support! Some of the popular websites that Scramjet, the backend that flux uses, supports include:
 
 - [Google](https://google.com)
 - [Twitter](https://twitter.com)
