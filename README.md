@@ -1,7 +1,6 @@
 <p align="center"><img src="https://raw.githubusercontent.com/blockfreeubg/flux-unblocker/refs/heads/main/public/logo.png" height="200"></p>
 
 <h1 align="center">Flux Unblocker</h1>
-## Supported Sites
 
 Flux has CAPTCHA support! Some of the popular websites that Scramjet supports include:
 
