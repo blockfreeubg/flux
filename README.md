@@ -1,4 +1,4 @@
-<p align="center"><img src="https://raw.githubusercontent.com/MercuryWorkshop/scramjet/main/assets/scramjet.png" height="200"></p>
+<p align="center"><img src="https://raw.githubusercontent.com/blockfreeubg/flux-unblocker/refs/heads/main/public/logo.png" height="200"></p>
 
 <h1 align="center">Flux Unblocker</h1>
 ## Supported Sites
