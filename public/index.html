@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-    <html>
-        <head>
-<!-- Google tag (gtag.js) -->
+<html>
+<head>
+
+<!-- Google tag -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJ3Y1WQHM3"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -11,24 +12,18 @@ gtag('config', 'G-HJ3Y1WQHM3');
 </script>
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <link rel="shortcut icon" href="favicon.ico" />
 <title>Flux</title>
-
-<link rel="stylesheet" href="index.css" />
-
-    <style>
-
+<link rel="stylesheet" href="index.css">
+<style>
 body{
 margin:0;
-font-family:sans-serif;
 height:100vh;
-display:flex;
 overflow:hidden;
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+font-family:'Segoe UI',sans-serif;
 }
-
 
 .background{
 position:fixed;
@@ -39,107 +34,114 @@ height:100%;
 z-index:-1;
 }
 
-
-.sidebar{
+.bottom-bar{
 position:fixed;
-left:0;
-top:0;
-width:90px;
-height:100vh;
-background:rgba(0,0,0,0.55);
-backdrop-filter:blur(8px);
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:rgba(20,20,20,0.6);
+backdrop-filter:blur(15px);
+border-radius:30px;
+padding:12px 30px;
 display:flex;
-flex-direction:column;
+gap:35px;
 align-items:center;
-padding-top:20px;
-gap:28px;
+box-shadow:0 0 25px rgba(0,0,0,0.5);
 }
 
-
-.sidebar a{
-text-decoration:none;
-color:white;
-font-size:13px;
+.bottom-bar button{
+background:none;
+border:none;
+cursor:pointer;
+width:32px;
+height:32px;
 display:flex;
-flex-direction:column;
 align-items:center;
-gap:6px;
-padding:10px;
-border-radius:10px;
-transition:0.2s;
+justify-content:center;
 }
 
-.sidebar a:hover{
-background:rgba(255,255,255,0.15);
+.bottom-bar svg{
+width:26px;
+height:26px;
+fill:white;
+opacity:0.9;
+transition:0.25s;
+filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));
 }
 
-.sidebar span{
-font-size:22px;
-}
-
-.sidebar img{
-width: 95px;
-margin: bottom 20px;
+.bottom-bar button:hover svg{
+opacity:1;
+transform:scale(1.2);
+filter: drop-shadow(0 0 8px rgba(255,255,255,0.6));
 }
 
 .content-area{
-margin-left:90px;
-width:calc(100% - 90px);
+width:100%;
 height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
 }
-
 
 .content-area iframe{
 width:100%;
 height:100%;
 border:none;
 }
-
-    </style>
+</style>
 
 </head>
 
-    <body>
-
-<div class="background">
-<span></span><span></span><span></span><span></span><span></span>
-<span></span><span></span><span></span><span></span><span></span>
-<span></span><span></span><span></span><span></span><span></span>
-<span></span><span></span><span></span><span></span><span></span>
-</div>
-
-    <div class="sidebar">
-
-<img src="logo.png">
-
-<a href="index.html">
-<span>🏠</span>
-Home
-</a>
-
-<a href="apps">
-<span>📦</span>
-Apps
-</a>
-
-<a href="games">
-<span>🎮</span>
-Games
-</a>
-
-<a href="godgames/">
-<span>🎲</span>
-Specials
-</a>
-
-</div>
-
-<main class="content-area">
-<iframe src="proxy.html" title="Content Proxy"></iframe>
+<body>
+    <main class="content-area">
+    <iframe src="proxy.html" title="Content Proxy"></iframe>
 </main>
 
-    </body>
+<div class="background">
+<span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+
+<div class="bottom-bar">
+
+<button onclick="location.href='index.html'">
+<svg viewBox="0 0 24 24">
+<path d="M12 3l9 8h-3v9h-4v-6H10v6H6v-9H3l9-8z"/>
+</svg>
+</button>
+
+
+<button onclick="location.href='games/index.html'">
+<svg viewBox="0 0 24 24">
+<path d="M7 10h2v2H7v2H5v-2H3v-2h2V8h2v2zm10-1a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm-3 3a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM6 6h12a4 4 0 014 4v4a4 4 0 01-4 4h-2l-2-2H10l-2 2H6a4 4 0 01-4-4v-4a4 4 0 014-4z"/>
+</svg>
+</button>
+
+
+<button onclick="location.href='apps/index.html'">
+<svg viewBox="0 0 24 24">
+<circle cx="5" cy="5" r="2"/>
+<circle cx="12" cy="5" r="2"/>
+<circle cx="19" cy="5" r="2"/>
+<circle cx="5" cy="12" r="2"/>
+<circle cx="12" cy="12" r="2"/>
+<circle cx="19" cy="12" r="2"/>
+<circle cx="5" cy="19" r="2"/>
+<circle cx="12" cy="19" r="2"/>
+<circle cx="19" cy="19" r="2"/>
+</svg>
+</button>
+
+
+<button onclick="location.href='godgames/index.html'">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="3" width="18" height="18" rx="4"/>
+<circle cx="8" cy="8" r="1.5"/>
+<circle cx="16" cy="8" r="1.5"/>
+<circle cx="12" cy="12" r="1.5"/>
+<circle cx="8" cy="16" r="1.5"/>
+<circle cx="16" cy="16" r="1.5"/>
+</svg>
+</button>
+
+</div>
+
+</body>
 </html>
