@@ -2,6 +2,8 @@
 
 <h1 align="center">Flux Unblocker</h1>
 
+<h2 align="center">Static version here: https://github.com/blockfreeubg/flux-unblocker-static</h2>
+
 Flux has CAPTCHA support! Some of the popular websites that Scramjet, the backend that flux uses, supports include:
 
 - [Google](https://google.com)
