@@ -17,14 +17,13 @@ gtag('config', 'G-HJ3Y1WQHM3');
 
 <link rel="shortcut icon" href="favicon.ico" />
 <title>Flux</title>
-<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="../index.css">
 <style>
 body{
 margin:0;
 height:100vh;
 overflow:hidden;
 font-family:'Segoe UI',sans-serif;
-z-index: 9;
 }
 
 .background{
@@ -49,7 +48,6 @@ display:flex;
 gap:35px;
 align-items:center;
 box-shadow:0 0 25px rgba(0,0,0,0.5);
-z-index: 9999;
 }
 
 .bottom-bar button{
@@ -88,34 +86,51 @@ width:100%;
 height:100%;
 border:none;
 }
+
+.side-ad{
+position:fixed;
+top:50%;
+transform:translateY(-50%);
+width:160px;
+z-index:10;
+}
+
+.left-ad{
+left:10px;
+}
+
+.right-ad{
+right:10px;
+}
 </style>
 
 </head>
-<!-- particles.js container --> <div id="particles-js"></div> <!-- stats - count particles --> <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
-     <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
 <body>
+    <!-- particles.js container --> <div id="particles-js"></div> <!-- stats - count particles --> <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> 
+     <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
     <main class="content-area">
-    <iframe src="proxy.html" title="Content Proxy"></iframe>
+    <iframe src="main.html" title="Content Proxy"></iframe>
 </main>
 
 
 <div class="bottom-bar">
 
-<button onclick="location.href='index.html'">
+<button onclick="location.href='../index.html'">
 <svg viewBox="0 0 24 24">
 <path d="M12 3l9 8h-3v9h-4v-6H10v6H6v-9H3l9-8z"/>
 </svg>
 </button>
 
 
-<button onclick="location.href='games/index.html'">
+<button onclick="location.href='../games/index.html'">
 <svg viewBox="0 0 24 24">
 <path d="M7 10h2v2H7v2H5v-2H3v-2h2V8h2v2zm10-1a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm-3 3a1.5 1.5 0 110-3 1.5 1.5 0 010 3zM6 6h12a4 4 0 014 4v4a4 4 0 01-4 4h-2l-2-2H10l-2 2H6a4 4 0 01-4-4v-4a4 4 0 014-4z"/>
 </svg>
 </button>
 
 
-<button onclick="location.href='apps/index.html'">
+<button onclick="location.href='../apps/index.html'">
 <svg viewBox="0 0 24 24">
 <circle cx="5" cy="5" r="2"/>
 <circle cx="12" cy="5" r="2"/>
@@ -144,7 +159,5 @@ border:none;
 </div>
 
 </body>
-<script>
-    particlesJS("particles-js", {"particles":{"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffd100"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.5,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":6,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":133.99274002972194,"size":25,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;
-</script>
+<script>particlesJS("particles-js", {"particles":{"number":{"value":80,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffd100"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.5,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":6,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"grab"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":133.99274002972194,"size":25,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;</script>
 </html>
