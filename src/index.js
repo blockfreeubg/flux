@@ -12,10 +12,6 @@ const publicPath = fileURLToPath(new URL("/", import.meta.url));
 
 // Wisp Configuration: Refer to the documentation at https://www.npmjs.com/package/@mercuryworkshop/wisp-js
 
-const rootDir = path.join(__dirname, "..");
-const express = require("express");
-const path = require("path");
-
 logging.set_level(logging.NONE);
 Object.assign(wisp.options, {
 	allow_udp_streams: false,
@@ -96,9 +92,4 @@ if (isNaN(port)) port = 8081;
 fastify.listen({
 	port: port,
 	host: "0.0.0.0",
-});
-
-app.use(express.static(path.join(rootDir, "public")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(rootDir, "public", "index.html"));
 });
