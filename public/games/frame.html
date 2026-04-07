@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,7 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -69,16 +69,28 @@
         }
     </style>
 </head>
+
 <body>
     <div class="content">
         <div class="iframe-container">
             <iframe id="gameframe" class="gameframe" src="/404.html"></iframe>
+
             <div class="bottom-bar">
-                <a href="games/index.html" style="margin-right: auto;"><i class="fas fa-arrow-left"></i></a>
-                <a href="javascript:void(0)" id="fullscreen"><i class="fas fa-expand"></i></a>
-                <a href="javascript:void(0)" id="reloadbtn"><i class="fas fa-sync-alt"></i></a>
-                <a href="javascript:void(0)" id="copylink"><i class="fas fa-link"></i></a>
-                <a href="javascript:void(0)" id="aboutblank"><i class="fas fa-external-link-alt"></i></a>
+                <a href="games/index.html" style="margin-right: auto;">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <a href="javascript:void(0)" id="fullscreen">
+                    <i class="fas fa-expand"></i>
+                </a>
+                <a href="javascript:void(0)" id="reloadbtn">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
+                <a href="javascript:void(0)" id="copylink">
+                    <i class="fas fa-link"></i>
+                </a>
+                <a href="javascript:void(0)" id="aboutblank">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -95,74 +107,53 @@
 
         var url = getUrlParameter('url');
         var loadedUrl = '';
-        var useSrcdoc = false;
+
         if (url) {
-            if (url.includes('cdn.jsdelivr.net')) {
-                loadedUrl = url;
-                useSrcdoc = true;
-                fetch(url)
-                    .then(function(r) { return r.text(); })
-                    .then(function(html) {
-                        document.getElementById('gameframe').srcdoc = html;
-                    })
-                    .catch(function() {
-                        useSrcdoc = false;
-                        document.getElementById('gameframe').src = '/404.html?q=' + encodeURIComponent(url);
-                    });
-            } else {
-                loadedUrl = url;
-                document.getElementById('gameframe').src = url;
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                url = 'https://' + url;
             }
+
+            var encoded = encodeURIComponent(url);
+
+            loadedUrl = '../scramjet/' + encoded;
+
+            document.getElementById('gameframe').src = loadedUrl;
         }
 
         document.getElementById('fullscreen').addEventListener('click', function () {
             var iframe = document.getElementById('gameframe');
-            (iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen || function(){}).call(iframe);
+            (iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen || function(){})
+                .call(iframe);
         });
 
         document.getElementById('reloadbtn').addEventListener('click', function () {
             var iframe = document.getElementById('gameframe');
-            if (useSrcdoc && loadedUrl) {
-                fetch(loadedUrl)
-                    .then(function(r) { return r.text(); })
-                    .then(function(html) { iframe.srcdoc = html; });
-            } else {
-                iframe.src = iframe.src;
-            }
+            iframe.src = iframe.src;
         });
-
         document.getElementById('copylink').addEventListener('click', function () {
             var copyBtn = this;
             var originalHTML = copyBtn.innerHTML;
-            if (loadedUrl) {
-                var fullUrl = window.location.origin + window.location.pathname + '?url=' + encodeURIComponent(loadedUrl);
+
+            if (url) {
+                var fullUrl = window.location.origin + window.location.pathname + '?url=' + encodeURIComponent(url);
+
                 navigator.clipboard.writeText(fullUrl).then(function () {
                     copyBtn.innerHTML = '<i class="fas fa-check"></i>';
                     copyBtn.classList.add('copied');
-                    setTimeout(function () { copyBtn.innerHTML = originalHTML; copyBtn.classList.remove('copied'); }, 2000);
-                }).catch(function () {
-                    var ta = document.createElement('textarea');
-                    ta.value = fullUrl;
-                    document.body.appendChild(ta);
-                    ta.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(ta);
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-                    copyBtn.classList.add('copied');
-                    setTimeout(function () { copyBtn.innerHTML = originalHTML; copyBtn.classList.remove('copied'); }, 2000);
+
+                    setTimeout(function () {
+                        copyBtn.innerHTML = originalHTML;
+                        copyBtn.classList.remove('copied');
+                    }, 2000);
                 });
-            } else {
-                copyBtn.innerHTML = '<i class="fas fa-times"></i>';
-                copyBtn.style.color = '#bf616a';
-                setTimeout(function () { copyBtn.innerHTML = originalHTML; copyBtn.style.color = ''; }, 1500);
             }
         });
 
-        // about:blank popup
         document.getElementById('aboutblank').addEventListener('click', function () {
             var win = window.open();
-            if (!win || win.closed) throw new Error('blocked');
-            var url = window.location.href;
+
+            if (!win || win.closed) return;
+
             var iframe = win.document.createElement('iframe');
             iframe.style.width = '100%';
             iframe.style.height = '100%';
@@ -170,12 +161,14 @@
             iframe.style.position = 'fixed';
             iframe.style.top = '0';
             iframe.style.left = '0';
-            iframe.src = url;
+            iframe.src = window.location.href;
+
             win.document.body.style.margin = '0';
             win.document.body.appendChild(iframe);
             win.document.title = 'New Tab';
         });
     </script>
+
     <script src="/js/file.js" defer></script>
 </body>
 </html>
