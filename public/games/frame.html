@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,8 +10,6 @@
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
-    <script src="/scram/scramjet.all.js"></script>
-    <script src="/baremux/index.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -70,17 +67,30 @@
             color: #a3be8c;
         }
     </style>
+    <script src="https://pl29046809.profitablecpmratenetwork.com/14/33/1c/14331ca261ae4e4ad2cabdbede9fb119.js"></script>
 </head>
+
 <body>
     <div class="content">
         <div class="iframe-container">
             <iframe id="gameframe" class="gameframe" src="/404.html"></iframe>
+
             <div class="bottom-bar">
-                <a href="games/index.html" style="margin-right: auto;"><i class="fas fa-arrow-left"></i></a>
-                <a href="javascript:void(0)" id="fullscreen"><i class="fas fa-expand"></i></a>
-                <a href="javascript:void(0)" id="reloadbtn"><i class="fas fa-sync-alt"></i></a>
-                <a href="javascript:void(0)" id="copylink"><i class="fas fa-link"></i></a>
-                <a href="javascript:void(0)" id="aboutblank"><i class="fas fa-external-link-alt"></i></a>
+                <a href="games/index.html" style="margin-right: auto;">
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <a href="javascript:void(0)" id="fullscreen">
+                    <i class="fas fa-expand"></i>
+                </a>
+                <a href="javascript:void(0)" id="reloadbtn">
+                    <i class="fas fa-sync-alt"></i>
+                </a>
+                <a href="javascript:void(0)" id="copylink">
+                    <i class="fas fa-link"></i>
+                </a>
+                <a href="javascript:void(0)" id="aboutblank">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
             </div>
         </div>
     </div>
@@ -98,79 +108,33 @@
         var url = getUrlParameter('url');
         var loadedUrl = '';
         var useSrcdoc = false;
-        var proxyFrame = null;
-        var iframe = document.getElementById('gameframe');
-        var frameContainer = document.querySelector('.iframe-container');
-        var persistentTitle = getUrlParameter('title') || 'Flux';
-
-        function setPageTitle() {
-            document.title = persistentTitle;
-            var titleElement = document.querySelector('title');
-            if (titleElement) titleElement.textContent = persistentTitle;
-        }
-
-        // Keep title persistent
-        setInterval(setPageTitle, 1000);
-
-        async function initGameFrame() {
-            setPageTitle();
-            if (!url) return;
-
-            loadedUrl = url;
-
+        if (url) {
             if (url.includes('cdn.jsdelivr.net')) {
+                loadedUrl = url;
                 useSrcdoc = true;
-                try {
-                    var response = await fetch(url);
-                    var html = await response.text();
-                    iframe.srcdoc = html;
-                    return;
-                } catch (e) {
-                    useSrcdoc = false;
-                    iframe.src = '/404.html?q=' + encodeURIComponent(url);
-                    return;
-                }
-            }
-
-            try {
-                var scramjet = new ScramjetController({
-                    files: {
-                        wasm: '/scram/scramjet.wasm.wasm',
-                        all: '/scram/scramjet.all.js',
-                        sync: '/scram/scramjet.sync.js',
-                    },
-                });
-                scramjet.init();
-
-                var connection = new BareMux.BareMuxConnection('/baremux/worker.js');
-                var wispUrl = (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.host + '/wisp/';
-                if ((await connection.getTransport()) !== '/libcurl/index.mjs') {
-                    await connection.setTransport('/libcurl/index.mjs', [
-                        { websocket: wispUrl },
-                    ]);
-                }
-
-                proxyFrame = scramjet.createFrame();
-                proxyFrame.frame.id = 'gameframe';
-                proxyFrame.frame.className = 'gameframe';
-                frameContainer.replaceChild(proxyFrame.frame, iframe);
-                iframe = proxyFrame.frame;
-                proxyFrame.go(url);
-            } catch (e) {
-                console.warn('Proxy failed, falling back to direct iframe:', e);
-                iframe.src = url;
+                fetch(url)
+                    .then(function(r) { return r.text(); })
+                    .then(function(html) {
+                        document.getElementById('gameframe').srcdoc = html;
+                    })
+                    .catch(function() {
+                        useSrcdoc = false;
+                        document.getElementById('gameframe').src = '/404.html?q=' + encodeURIComponent(url);
+                    });
+            } else {
+                loadedUrl = url;
+                document.getElementById('gameframe').src = url;
             }
         }
 
         document.getElementById('fullscreen').addEventListener('click', function () {
-            var activeFrame = document.getElementById('gameframe');
-            (activeFrame.requestFullscreen || activeFrame.mozRequestFullScreen || activeFrame.webkitRequestFullscreen || activeFrame.msRequestFullscreen || function(){}).call(activeFrame);
+            var iframe = document.getElementById('gameframe');
+            (iframe.requestFullscreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullscreen || iframe.msRequestFullscreen || function(){}).call(iframe);
         });
 
         document.getElementById('reloadbtn').addEventListener('click', function () {
-            if (proxyFrame && loadedUrl) {
-                proxyFrame.go(loadedUrl);
-            } else if (useSrcdoc && loadedUrl) {
+            var iframe = document.getElementById('gameframe');
+            if (useSrcdoc && loadedUrl) {
                 fetch(loadedUrl)
                     .then(function(r) { return r.text(); })
                     .then(function(html) { iframe.srcdoc = html; });
@@ -178,41 +142,32 @@
                 iframe.src = iframe.src;
             }
         });
-
         document.getElementById('copylink').addEventListener('click', function () {
             var copyBtn = this;
             var originalHTML = copyBtn.innerHTML;
-            if (loadedUrl) {
-                var fullUrl = window.location.origin + window.location.pathname + '?url=' + encodeURIComponent(loadedUrl);
+
+            if (url) {
+                var fullUrl = window.location.origin + window.location.pathname + '?url=' + encodeURIComponent(url);
+
                 navigator.clipboard.writeText(fullUrl).then(function () {
                     copyBtn.innerHTML = '<i class="fas fa-check"></i>';
                     copyBtn.classList.add('copied');
-                    setTimeout(function () { copyBtn.innerHTML = originalHTML; copyBtn.classList.remove('copied'); }, 2000);
-                }).catch(function () {
-                    var ta = document.createElement('textarea');
-                    ta.value = fullUrl;
-                    document.body.appendChild(ta);
-                    ta.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(ta);
-                    copyBtn.innerHTML = '<i class="fas fa-check"></i>';
-                    copyBtn.classList.add('copied');
-                    setTimeout(function () { copyBtn.innerHTML = originalHTML; copyBtn.classList.remove('copied'); }, 2000);
+
+                    setTimeout(function () {
+                        copyBtn.innerHTML = originalHTML;
+                        copyBtn.classList.remove('copied');
+                    }, 2000);
                 });
-            } else {
-                copyBtn.innerHTML = '<i class="fas fa-times"></i>';
-                copyBtn.style.color = '#bf616a';
-                setTimeout(function () { copyBtn.innerHTML = originalHTML; copyBtn.style.color = ''; }, 1500);
             }
         });
 
         initGameFrame();
 
-        // about:blank popup
         document.getElementById('aboutblank').addEventListener('click', function () {
             var win = window.open();
-            if (!win || win.closed) throw new Error('blocked');
-            var url = window.location.href;
+
+            if (!win || win.closed) return;
+
             var iframe = win.document.createElement('iframe');
             iframe.style.width = '100%';
             iframe.style.height = '100%';
@@ -220,17 +175,12 @@
             iframe.style.position = 'fixed';
             iframe.style.top = '0';
             iframe.style.left = '0';
-            iframe.src = url;
+            iframe.src = window.location.href;
+
             win.document.body.style.margin = '0';
             win.document.body.appendChild(iframe);
             win.document.title = 'New Tab';
         });
-    </script>
-    <script>
-        // Register service worker for Scramjet proxying
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js').catch(err => console.warn('SW registration failed:', err));
-        }
     </script>
     <script src="/js/file.js" defer></script>
 </body>
